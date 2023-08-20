@@ -2,7 +2,7 @@ import os
 import sys
 from urllib.request import urlretrieve
 
-from sunpy_sphinx_theme.conf import *  # NOQA
+from sunpy_sphinx_theme import ON_RTD
 
 sys.path.append(os.path.abspath("exts"))
 extensions = [
@@ -63,18 +63,25 @@ language = "en"
 
 pygments_style = "sphinx"
 
+
+def _local_build():
+    if ON_RTD:
+        return "https://sunpy.org"
+    else:
+        return "/"
+
+
 default_role = "obj"
+html_theme = "sunpy"
 html_title = "sunpy.org"
 html_static_path = ["_static"]
 html_extra_path = ["_static/img"]
-html_theme_options.update(
-    {
-        "show_prev_next": False,
-        "on_rtd": False,
-        "use_download_button": False,
-        "use_fullscreen_button": False,
-    }
-)
+html_theme_options = {
+    "show_prev_next": False,
+    "use_download_button": False,
+    "use_fullscreen_button": False,
+    "sunpy_site_root": _local_build(),
+}
 
 blog_sidebars = [
     "ablog/postcard.html",
