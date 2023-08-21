@@ -64,13 +64,6 @@ language = "en"
 pygments_style = "sphinx"
 
 
-def _local_build():
-    if ON_RTD:
-        return "https://sunpy.org"
-    else:
-        return "/"
-
-
 default_role = "obj"
 html_theme = "sunpy"
 html_title = "sunpy.org"
@@ -80,7 +73,8 @@ html_theme_options = {
     "show_prev_next": False,
     "use_download_button": False,
     "use_fullscreen_button": False,
-    "sunpy_site_root": _local_build(),
+    # This build uses / as the root for the top nav
+    "sst_site_root": "/",
 }
 
 blog_sidebars = [
